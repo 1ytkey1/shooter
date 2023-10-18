@@ -8,9 +8,9 @@ H = 700
 
 window = display.set_mode((W, H))
 display.set_caption('Shooter')
-display.set_icon(image.load('rocket.png'))
+display.set_icon(image.load('butterfly.png'))
 
-back = transform.scale(image.load('galaxy.jpg'), (W, H))
+back = transform.scale(image.load('fon1.jpeg'), (W, H))
 # clock = time.Clock()
 # змінні 
 lost = 0
@@ -21,7 +21,7 @@ life = 5
 mixer.init()
 mixer.music.load('space.ogg')
 mixer.music.set_volume(0.3)
-fire = mixer.Sound('fire.ogg')
+fire = mixer.Sound('firefly.ogg')
 mixer.music.play()
 
 """ ШРИФТИ """
@@ -57,7 +57,7 @@ class Player(GameSprite):
             self.rect.x += self.speed    
 
     def fire(self):
-        bullet = Bullet('bullet.png', self.rect.centerx, self.rect.top, 15, 20, 10)
+        bullet = Bullet('bulletfly.png', self.rect.centerx, self.rect.top, 15, 20, 10)
         bullets.add(bullet)        
 
 class Enemy(GameSprite):
@@ -75,13 +75,13 @@ class Bullet(GameSprite):
         if self.rect.y < 0:
             self.kill()
 
-player = Player("rocket.png", W/2, H-100, 80, 100, 10) # створення гравця
+player = Player("butterfly.png", W/2, H-100, 80, 100, 10) # створення гравця
 
 monsters = sprite.Group() # створення групи спрайтів
 bullets = sprite.Group()
 
 for i in range(5): # створюємо ворогів та додаємо в групу
-    monster = Enemy("ufo.png", randint(0, W-80), randint(-50, 0), 80, 50, randint(1, 3))
+    monster = Enemy("lotus.png", randint(0, W-80), randint(-50, 0), 80, 50, randint(1, 3))
     monsters.add(monster)
 
 game = True
@@ -120,7 +120,7 @@ while game:
         if rel_time:
             new_time = t.time()
             if new_time - last_time < 3:
-                reload_txt = font1.render('Перезарядка...', True, (255, 0, 0))
+                reload_txt = font1.render('Перезарядка...', True, (204, 255, 255))
                 window.blit(reload_txt, (W/2-100, H/2))
             else:
                 rel_time = False
@@ -142,12 +142,12 @@ while game:
 
         if sprite.spritecollide(player, monsters, True):
             life -= 1
-            monster = Enemy("ufo.png", randint(0, W-80), -50, 80, 50, randint(1, 3))
+            monster = Enemy("lotus.png", randint(0, W-80), -50, 80, 50, randint(1, 3))
             monsters.add(monster)
         collides = sprite.groupcollide(bullets, monsters, True, True)
         for col in collides:
             killed += 1
-            monster = Enemy("ufo.png", randint(0, W-80), -50, 80, 50, randint(1, 3))
+            monster = Enemy("lotus.png", randint(0, W-80), -50, 80, 50, randint(1, 3))
             monsters.add(monster)
         if killed >= 11:
             win = font2.render('Ти виграв!!!', True, (0, 255, 0))
@@ -170,7 +170,7 @@ while game:
             for b in bullets:
                 b.kill()
             for i in range(5):
-                monster = Enemy("ufo.png", randint(0, W-80), randint(-50, 0), 80, 50, randint(1, 3))
+                monster = Enemy("lotus.png", randint(0, W-80), randint(-50, 0), 80, 50, randint(1, 3))
                 monsters.add(monster)
             finish = False
 
