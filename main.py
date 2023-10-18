@@ -47,7 +47,7 @@ class GameSprite(sprite.Sprite):
     # метод, що малює героя у вікні
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
-
+# гравець
 class Player(GameSprite):
     def update(self):
         keys_pressed = key.get_pressed()
@@ -55,11 +55,11 @@ class Player(GameSprite):
             self.rect.x -= self.speed
         if keys_pressed[K_d] and self.rect.x < W - 80:
             self.rect.x += self.speed    
-
+    # пуля
     def fire(self):
         bullet = Bullet('bulletfly.png', self.rect.centerx, self.rect.top, 15, 20, 10)
         bullets.add(bullet)        
-
+# ворог
 class Enemy(GameSprite):
     def update(self):
         global lost
@@ -68,7 +68,7 @@ class Enemy(GameSprite):
             self.rect.y = 0
             self.rect.x = randint(0, W - 80)
             lost += 1
-
+# пуля
 class Bullet(GameSprite):
     def update(self):
         self.rect.y -= self.speed
@@ -84,11 +84,12 @@ for i in range(5): # створюємо ворогів та додаємо в г
     monster = Enemy("lotus.png", randint(0, W-80), randint(-50, 0), 80, 50, randint(1, 3))
     monsters.add(monster)
 
-game = True
+game = True # 
 finish = False
 num_fire = 0
 rel_time = False
-color_life = (0, 255, 0)
+color_life = (0, 255, 0) # колір життя
+
 while game:
     time.delay(50)
     for e in event.get():
